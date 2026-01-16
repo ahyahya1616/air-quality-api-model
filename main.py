@@ -16,6 +16,11 @@ class SensorData(BaseModel):
     temp: float
     hum: float
 
+@app.get("/")
+def read_root():
+    return {"status": "API is running", "endpoint": "/predict"}
+
+
 @app.post("/predict")
 def predict(data: SensorData):
     features = np.array([[data.co2, data.pm25, data.temp, data.hum]])
